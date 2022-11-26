@@ -32,14 +32,14 @@ namespace Movies.Application.Queries
 
         public async Task<SearchMovie> Handle(MoviesQuery request, CancellationToken cancellationToken)
         {
-            var result = await _validator.ValidateAsync(request);
+            FluentValidation.Results.ValidationResult? result = await _validator.ValidateAsync(request);
 
             if (!result.IsValid)
             {
                 throw new ArgumentException();
             }
 
-            var movies = await _movieApiService.GetMovieAsync(request.ApiKey, request.Expression, cancellationToken);
+            SearchMovie? movies = await _movieApiService.GetMovieAsync(request.ApiKey, request.Expression, cancellationToken);
             return movies ?? throw new InvalidOperationException();
         }
     }

@@ -46,8 +46,8 @@ public class WatchHistoryController : ControllerBase
     [HttpGet("Get")]
     public async Task<IActionResult> Get(int userId, CancellationToken cancellationToken)
     {
-        var query = new GetWatchHistory() { UserId = userId };
-        var response = await _sender.Send(query, cancellationToken);
+        GetWatchHistory? query = new GetWatchHistory() { UserId = userId };
+        List<Domain.Models.WatchHistoryItem>? response = await _sender.Send(query, cancellationToken);
         return Ok(response);
     }
 
@@ -62,8 +62,8 @@ public class WatchHistoryController : ControllerBase
     [HttpPut("Update")]
     public async Task<IActionResult> Update(int userId, string movieId, CancellationToken cancellationToken)
     {
-        var query = new UpdateWatchHistoryItem() { UserId = userId, MovieId = movieId };
-        var response = await _sender.Send(query, cancellationToken);
+        UpdateWatchHistoryItem? query = new UpdateWatchHistoryItem() { UserId = userId, MovieId = movieId };
+        Unit response = await _sender.Send(query, cancellationToken);
         return Ok(response);
     }
 

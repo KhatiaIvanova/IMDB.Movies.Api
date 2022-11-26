@@ -28,7 +28,7 @@ namespace Movies.Application.Queries.WatchHistory
 
         public async Task<Unit> Handle(UpdateWatchHistoryItem request, CancellationToken cancellationToken)
         {
-            var entity = new WatchHistoryItem()
+            WatchHistoryItem? entity = new WatchHistoryItem()
             {
                 UserId = request.UserId,
                 MovieId = request.MovieId

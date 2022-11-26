@@ -17,11 +17,11 @@ public class ImdbSearchService : IIMdbSearchService
 
     public async Task<SearchMovie> GetMovieAsync(string apikey, string expression, CancellationToken cancellationToken = default)
     {
-        var url = $"{_apiUrl}/API/Search/{apikey}/{expression}";
-        using var client = new RestClient();
-        var request = new RestRequest(url);
+        string? url = $"{_apiUrl}/API/Search/{apikey}/{expression}";
+        using RestClient? client = new RestClient();
+        RestRequest? request = new RestRequest(url);
         request.AddOrUpdateHeader("Content-Type", "application/json;charset=UTF-8");
-        var response = await client.ExecuteGetAsync<SearchMovie>(request);
+        RestResponse<SearchMovie>? response = await client.ExecuteGetAsync<SearchMovie>(request);
 
         if (!response.IsSuccessful)
         {

@@ -31,7 +31,7 @@ public class AddWatchHistoryItemRequestHandler : IRequestHandler<AddWatchHistory
 
     public async Task<Unit> Handle(AddWatchHistoryItemRequest request, CancellationToken cancellationToken)
     {
-        var entity = new WatchHistoryItem()
+        WatchHistoryItem? entity = new WatchHistoryItem()
         {
             UserId = request.UserId,
             MovieId = request.MovieId,

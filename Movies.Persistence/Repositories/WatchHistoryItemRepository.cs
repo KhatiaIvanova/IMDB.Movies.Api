@@ -22,15 +22,18 @@ namespace Movies.Persistence.Repositories
             await DbContext.SaveChangesAsync();
         }
 
-        public async  Task<List<WatchHistoryItem>> Get(int userId, CancellationToken cancellationToken = default)
+        public async Task<List<WatchHistoryItem>> Get(int userId, CancellationToken cancellationToken = default)
         {
-           return await DbContext.WatchHistoryItem.Where(x => x.UserId == userId).ToListAsync();
+            return await DbContext.WatchHistoryItem.Where(x => x.UserId == userId).ToListAsync();
         }
-       
+
         public async Task MarkWatched(WatchHistoryItem entity, CancellationToken cancellationToken = default)
         {
-            var watchHistoryItem = await DbContext.WatchHistoryItem.FirstOrDefaultAsync(x => x.UserId == entity.UserId && x.MovieId == entity.MovieId);
-            if (watchHistoryItem == null) return;
+            WatchHistoryItem? watchHistoryItem = await DbContext.WatchHistoryItem.FirstOrDefaultAsync(x => x.UserId == entity.UserId && x.MovieId == entity.MovieId);
+            if (watchHistoryItem == null)
+            {
+                return;
+            }
 
             watchHistoryItem.Watched = true;
 

@@ -27,9 +27,9 @@ namespace Movies.API.Controllers
         public async Task<IActionResult> GetMovieList(string apiKey, string expression, CancellationToken cancellationToken)
         {
 
-            var query = new MoviesQuery() { ApiKey = apiKey, Expression = expression };
+            MoviesQuery? query = new MoviesQuery() { ApiKey = apiKey, Expression = expression };
 
-            var response = await _sender.Send(query, cancellationToken);
+            SearchMovie? response = await _sender.Send(query, cancellationToken);
             return Ok(response);
         }
     }

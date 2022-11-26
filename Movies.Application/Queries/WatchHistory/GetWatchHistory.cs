@@ -26,7 +26,7 @@ public class GetWatchHistoryHandler : IRequestHandler<GetWatchHistory, List<Watc
 
     public async Task<List<WatchHistoryItem>> Handle(GetWatchHistory request, CancellationToken cancellationToken)
     {
-        var watchList = await _repository.Get(request.UserId, cancellationToken);
+        List<WatchHistoryItem>? watchList = await _repository.Get(request.UserId, cancellationToken);
         return watchList ?? throw new InvalidOperationException();
     }
 }

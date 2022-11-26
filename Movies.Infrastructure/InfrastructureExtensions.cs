@@ -12,8 +12,8 @@ public static class InfrastructureExtensions
 {
     public static void AddInfrastructure(this IServiceCollection services)
     {
-        var serviceProvider = services.BuildServiceProvider();
-        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        ServiceProvider? serviceProvider = services.BuildServiceProvider();
+        IConfiguration? configuration = serviceProvider.GetRequiredService<IConfiguration>();
 
         services.AddDbContext<SpaceIMDBDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
